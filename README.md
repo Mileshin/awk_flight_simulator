@@ -25,7 +25,7 @@
 
 Выход q
 
-Авиасимулятор, написанный на gawk. Цель игры перелететь карту на самолете и сесть на посадочной полосе. Она отмечена знаками > и < по бокам. Посадка возможна лишь при минимальной скорости самолета. Повороты совершаются на 90 градусов и совершаются с заносом, то есть игрок при повороте пролетит еще каеоето расстояние вперед за счет инерции. При вылете за пределы карты игрок оказывается на противоположенной стороне карты.
+Авиасимулятор, написанный на gawk. Цель игры: перелететь карту на самолете и сесть на посадочной полосе. Она отмечена знаками > и < по бокам. Посадка возможна лишь при минимальной скорости самолета. Повороты совершаются на 90 градусов с заносом, то есть игрок при повороте пролетит еще какое-то расстояние вперед за счет инерции. При вылете за пределы карты игрок оказывается на противоположенной стороне карты.
 
 Скорости самолета и соответствие в движении на карте
 
@@ -62,7 +62,7 @@ Turn to the right l
 
 The output q
 
-The simulator, written in gawk. The goal of the game map to fly on a plane and land on the runway. It is marked by the signs > and < on the sides. Landing is possible only if the minimum speed of the aircraft. Turns are made 90 degrees and are made with a skid, that is, the player at turn will fly for caiolo distance forward due to the inertia. When departure beyond the map the player is on the opposite side of the card.
+The simulator, written in gawk. The goal of the game map to fly on a plane and land on the runway. It is marked by the signs > and < on the sides. Landing is possible only if the minimum speed of the aircraft. Turns are made 90 degrees and are made with a skid, that is, the player at turn will fly for something distance forward due to the inertia. When departure beyond the map the player is on the opposite side of the card.
 
 The speed of the aircraft and compliance in the movement on the map
 
