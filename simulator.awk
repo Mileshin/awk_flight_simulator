@@ -1,22 +1,12 @@
-
-
+Copyright (c) 2017 Andrey Mileshin
+#email andrej.mileshin@yandex.ru
 BEGIN {
-    #screen width and height
     w=64
     h=48
-    #default color mode, change at runtime by pressing 1-4
-    #1 = no color, chars only, fast drawing
-    #2 = colored chars
-    #3 = background color only
-    #4 = background color with char textures
     colormode = 4
-
-
     #INITIALIZATION
     buffer[w,h]
-
     moveSpeed = 0
-	rotSpeed = 0.3
     fuel = 1001   
     #key bindings
     exit_key = "q"
@@ -29,15 +19,10 @@ BEGIN {
     movdown_key = "j"
     rotl_key = "h"
     rotr_key = "l"
-
+    
 	#initial player direction vector
 	dirX = -1
 	dirY = 0
-
-	#camera plane perpendicular to direction vector
-	planeX = -0.66
-	planeY = 0.0
-
 	#LEVEL DESIGN
 	mapWidth=66
 	mapHeight=64
@@ -106,16 +91,12 @@ BEGIN {
 	"555555555555555555555555555555555555555555555555555555555555555555"\
 	"555555555555555555555555555555555555555555555555555555555555555555"\
 	"555555555555555555555555555555555555555555555555555555555555555555"
-
 	ceilingTex = ".."
 	ceilingColor = 7
 	ceilingIsBright = 1
-
 	floorTex = "__"
 	floorColor = 3
 	floorIsBright = 0
-
-
 	#initial player position
 	posX = 48
 	posY = 48
