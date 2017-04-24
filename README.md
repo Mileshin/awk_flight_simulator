@@ -62,7 +62,7 @@ Turn to the right l
 
 The output q
 
-The simulator, written in gawk. The goal of the game map to fly on a plane and land on the runway. It is marked by the signs > and < on the sides. Landing is possible only if the minimum speed of the aircraft. Turns are made 90 degrees and are made with a skid, that is, the player at turn will fly for something distance forward due to the inertia. When departure beyond the map the player is on the opposite side of the card.
+Aviation simulator written in gawk. Purpose of the game: fly the map on the plane and sit on the runway. It is marked by the signs > and < on the sides. Landing is possible only with the minimum speed of the aircraft. Turns are made at 90 degrees with a drift, that is, the player will fly some more distance ahead at the expense of inertia when turning. When flying out of the card, the player is on the opposite side of the card.
 
 The speed of the aircraft and compliance in the movement on the map
 
