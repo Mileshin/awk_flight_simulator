@@ -1,4 +1,5 @@
-Copyright (c) 2017 Andrey Mileshin
+#!/usr/bin/awk -f
+#Copyright (c) 2017 Andrey Mileshin
 #email andrej.mileshin@yandex.ru
 BEGIN {
     w=64
@@ -7,7 +8,7 @@ BEGIN {
     #INITIALIZATION
     buffer[w,h]
     moveSpeed = 0
-    fuel = 1001   
+    fuel = 1001
     #key bindings
     exit_key = "q"
     #key moving
@@ -19,7 +20,7 @@ BEGIN {
     movdown_key = "j"
     rotl_key = "h"
     rotr_key = "l"
-    
+
 	#initial player direction vector
 	dirX = -1
 	dirY = 0
@@ -133,16 +134,16 @@ BEGIN {
 	  print "YOU CRASHED!"
 	else if (result == 2)
       print "RUN OUT OF FUEL"
-    else 
+    else
 	  print "You quit."
 }
 
 function takeoff(){
     for(i=w/2;i>21;i-=2){
         Background();
-        if(int(i)%2==1) 
+        if(int(i)%2==1)
         rise(i,1,h/2);
-        else 
+        else
         rise(i,2,h/2);
         speedometer();
         fuel_meter();
@@ -164,7 +165,7 @@ function worldMap(y, x) {
   y = int(y)
   x = int(x)
   tile = substr(map, mapWidth*y+x+1, 1)
-  if (tile == ".") 
+  if (tile == ".")
     return 0
   return tile
 }
@@ -247,7 +248,7 @@ function getPixel(basecolor, isBright, colormode, tex){
 function draw_surface(right_border,left_border,delta_left,delta_right,delta1,delta2,color,bright,nh,delta_nh)
 {
     if((color=="m") || (color=="M")) return 0
-    if(color==9) color = 5 
+    if(color==9) color = 5
     if(color == 5) surface="AA"
     if(color == 1) surface="NN"
     if(color == 3) surface="^^"
@@ -267,7 +268,7 @@ function draw_surface(right_border,left_border,delta_left,delta_right,delta1,del
 function draw_surface_right(right_border,left_border,delta_left,delta_right,delta1,delta2,color,bright,nh,delta_nh)
 {
     if((color=="m") || (color=="M"))  return 0
-    if(color==9) color = 5 
+    if(color==9) color = 5
     if(color == 5) surface="AA"
     if(color == 1) surface="NN"
     if(color == 3) surface="<<"
@@ -287,7 +288,7 @@ function draw_surface_right(right_border,left_border,delta_left,delta_right,delt
 function draw_surface_left(right_border,left_border,delta_left,delta_right,delta1,delta2,color,bright,nh,delta_nh)
 {
     if((color=="m") || (color=="M"))  return 0
-    if(color==9) color = 5 
+    if(color==9) color = 5
     if(color == 5) surface="AA"
     if(color == 1) surface="NN"
     if(color == 3) surface=">>"
@@ -308,13 +309,13 @@ function mini_map(mw,mh){
    for(i=-mw;i<=mw;i++){
     for(j=-mw;j<=mw;j++){
         surface = worldMap(posX-DposY*i-DposX*j,posY-DposX*i-DposY*j);
-        
+
         if(surface==9) surface = 5;
         else if(surface==5) text="aa"
         else if(surface==1) text="nn"
         else if(surface=="m") {text="mm"; surface=4 }
         else if(surface=="M") {text="mm"; surface=8 }
-       else { surface = 3;  text=".."} 
+       else { surface = 3;  text=".."}
      if(DposY!=0)
         buffer[mw-i,mh+j]= getPixel(surface,1,colormode,text);
         else
@@ -343,7 +344,7 @@ function    psevdo_raund(x,y,color)
      buffer[x-2,y+2] = getPixel(color,1,colormode,"  ");
      buffer[x+2,y+2] = getPixel(color,1,colormode,"  ");
      buffer[x-2,y+3] = getPixel(color,1,colormode,"  ");
-     buffer[x+2,y+3] = getPixel(color,1,colormode,"  "); 
+     buffer[x+2,y+3] = getPixel(color,1,colormode,"  ");
      buffer[x+1,y+4] = getPixel(color,1,colormode,"  ");
      buffer[x-1,y+4] = getPixel(color,1,colormode,"  ");
      buffer[x,y+5] = getPixel(color,1,colormode,"  ");
@@ -370,14 +371,14 @@ for(y=h;y>nh+3;y--){
        buffer[x,y]=getPixel(1,1,colormode,"NN");
    }
        if((fire==1)&&(x>=w/2+nw-delta)){
-            if(y%2==0){ 
+            if(y%2==0){
                 buffer[x-1,y]=getPixel(4,1,colormode,"FF");
                 buffer[(w/2)-nw+delta,y]=getPixel(4,1,colormode,"FF");
        }
        }
        else{
         if(((y%2) == 1)&&(x>=w/2+nw-delta)){
-            buffer[x-1,y]=getPixel(4,1,colormode,"FF"); 
+            buffer[x-1,y]=getPixel(4,1,colormode,"FF");
                 buffer[(w/2)-nw+delta,y]=getPixel(4,1,colormode,"FF");
        }
        }
@@ -421,7 +422,7 @@ function main()
         fuel--;
     else return 2;
     Background();
-    #EARTH SURFACE   
+    #EARTH SURFACE
     {
     DposX=-dirX; DposY=dirY;
     left_board=22; right_board=42;
@@ -439,7 +440,7 @@ function main()
     #surface -1;0
     left_board=0; right_board=22
      surface = worldMap(posX - 1*DposY,posY - 1*DposX);
-     if(surface != 0) { 
+     if(surface != 0) {
         draw_surface_left(right_border,left_border,-1,-1,2,0,surface,1,h-1,7);
      }
 
@@ -450,41 +451,41 @@ function main()
      }
      #surface -1;2
      surface = worldMap(posX-1*DposY-2*DposX,posY-1*DposX+2*DposY);
-     if(surface != 0) { 
+     if(surface != 0) {
         draw_surface_left(right_border,left_border,20,6,2,0,surface,1,h-1-14,3);
      }
     #surface -1;3
      surface = worldMap(posX-1*DposY-3*DposX,posY-1*DposX+3*DposY);
-     if(surface != 0) { 
+     if(surface != 0) {
         draw_surface_left(right_border,left_border,27,8,2,0,surface,1,h-1-18,1);
      }
 
     #surface 1;0
     left_board=42; right_board=64
      surface = worldMap(posX + 1*DposY,posY + 1*DposX);
-     if(surface != 0) { 
+     if(surface != 0) {
         draw_surface_right(right_border,left_border,-1,-1,0,2,surface,1,h-1,7);
      }
     #surface 1;1
      surface = worldMap(posX+1*DposY-1*DposX,posY+1*DposX+1*DposY);
-     if(surface != 0) { 
+     if(surface != 0) {
         draw_surface_right(right_border,left_border,3,11,0,2,surface,1,h-1-8,5);
      }
      #surface 1;2
      surface = worldMap(posX+1*DposY-2*DposX,posY+1*DposX+2*DposY);
-     if(surface != 0) { 
+     if(surface != 0) {
         draw_surface_right(right_border,left_border,6,20,0,2,surface,1,h-1-14,3);
      }
     #surface 1;3
      surface = worldMap(posX+1*DposY-3*DposX,posY+1*DposX+3*DposY);
-     if(surface != 0) { 
+     if(surface != 0) {
         draw_surface_right(right_border,left_border,8,27,0,2,surface,1,h-1-18,1);
      }
 
     #surface -2;0
     left_board=-3; right_board=0
      surface = worldMap(posX - 2*DposY,posY - 2*DposX);
-     if(surface != 0) { 
+     if(surface != 0) {
         draw_surface_left(right_border,left_border,-1,-1,0,2,surface,1,h-1,7);
      }
     #surface -2;1
@@ -495,12 +496,12 @@ function main()
 
      #surface -2;2
      surface = worldMap(posX-2*DposY-2*DposX,posY-2*DposX+2*DposY);
-     if(surface != 0) { 
+     if(surface != 0) {
         draw_surface_left(right_border,left_border,16,20,3,2,surface,1,h-1-14,3);
      }
     #surface -2;3
      surface = worldMap(posX-2*DposY-3*DposX,posY-2*DposX+3*DposY);
-     if(surface != 0) { 
+     if(surface != 0) {
         draw_surface_left(right_border,left_border,27,27,2,2,surface,1,h-1-18,1);
      }
     #surface -3;1
@@ -511,34 +512,34 @@ function main()
      }
      #surface -3;2
      surface = worldMap(posX-3*DposY-2*DposX,posY-3*DposX+2*DposY);
-     if(surface != 0) { 
+     if(surface != 0) {
         draw_surface_left(right_border,left_border,5,13,4,3,surface,1,h-1-14,3);
      }
    #surface -3; 3
     surface = worldMap(posX-3*DposY-3*DposX,posY-3*DposX+3*DposY);
-    if(surface != 0) { 
+    if(surface != 0) {
        draw_surface_left(right_border,left_border,20,24,4,2,surface,1,h-1-18,1);
     }
 
      #surface -4;2
      surface = worldMap(posX-4*DposY-2*DposX,posY-4*DposX+2*DposY);
-     if(surface != 0) { 
+     if(surface != 0) {
         draw_surface_left(right_border,left_border,0,2,0,4,surface,1,h-1-14,3);
      }
   #surface -4; 3
    surface = worldMap(posX-4*DposY-3*DposX,posY-4*DposX+3*DposY);
-   if(surface != 0) { 
+   if(surface != 0) {
       draw_surface_left(right_border,left_border,8,17,6,4,surface,1,h-1-18,1);
    }
   #surface -5; 3
    surface = worldMap(posX-5*DposY-3*DposX,posY-5*DposX+3*DposY);
-   if(surface != 0) { 
+   if(surface != 0) {
       draw_surface_left(right_border,left_border,0, 5,0,6,surface,1,h-1-18,1);
    }
     #surface 2;0
     left_board=w; right_board=w+3
      surface = worldMap(posX + 2*DposY,posY + 2*DposX);
-     if(surface != 0) { 
+     if(surface != 0) {
         draw_surface_right(right_border,left_border,-1,-1,2,0,surface,1,h-1,7);
      }
     #surface -2;1
@@ -549,12 +550,12 @@ function main()
 
      #surface -2;2
      surface = worldMap(posX+2*DposY-2*DposX,posY+2*DposX+2*DposY);
-     if(surface != 0) { 
+     if(surface != 0) {
         draw_surface_right(right_border,left_border,20,16,2,3,surface,1,h-1-14,3);
      }
     #surface -2;-3
      surface = worldMap(posX+2*DposY-3*DposX,posY+2*DposX+3*DposY);
-     if(surface != 0) { 
+     if(surface != 0) {
         draw_surface_right(right_border,left_border,27,27,2,2,surface,1,h-1-18,1);
      }
     #surface -3;1
@@ -565,32 +566,32 @@ function main()
      }
      #surface -3;2
      surface = worldMap(posX+3*DposY-2*DposX,posY+3*DposX+2*DposY);
-     if(surface != 0) { 
+     if(surface != 0) {
         draw_surface_right(right_border,left_border,13,5,3,4,surface,1,h-1-14,3);
      }
    #surface -3; 3
     surface = worldMap(posX+3*DposY-3*DposX,posY+3*DposX+3*DposY);
-    if(surface != 0) { 
+    if(surface != 0) {
        draw_surface_right(right_border,left_border,24,20,2,4,surface,1,h-1-18,1);
     }
      #surface  4;2
      surface = worldMap(posX+4*DposY-2*DposX,posY+4*DposX+2*DposY);
-     if(surface != 0) { 
+     if(surface != 0) {
         draw_surface_right(right_border,left_border,2,0,4,0,surface,1,h-1-14,3);
      }
   #surface  4; 3
    surface = worldMap(posX+4*DposY-3*DposX,posY+4*DposX+3*DposY);
-   if(surface != 0) { 
+   if(surface != 0) {
       draw_surface_right(right_border,left_border,17,8,6,4,surface,1,h-1-18,1);
    }
   #surface 5; 3
    surface = worldMap(posX+5*DposY-3*DposX,posY+5*DposX+3*DposY);
-   if(surface != 0) { 
+   if(surface != 0) {
       draw_surface_right(right_border,left_border,5, 0,6,0,surface,1,h-1-18,1);
    }
    }
    #MOUNTAIN
-   {    #center     
+   {    #center
         surface = worldMap(posX-6*DposX,posY+6*DposY);
         if(surface == "M")
             mountain(5,int((w+50)/32),int(w/2),h-20,1);
@@ -672,7 +673,7 @@ function main()
      surface = worldMap(posX+2*DposY-2*DposX,posY+2*DposX+2*DposY);
         if(surface == "M")
            mountain(5,int(w/2)+15,w+int(w/4),h,7);
-       
+
        #left3
     surface = worldMap(posX-3*DposY-5*DposX,posY-3*DposX+5*DposY);
         if(surface == "M")
@@ -706,7 +707,7 @@ function main()
     speedometer();
     #fuel meter
     fuel_meter();
-  redraw();  
+  redraw();
     if((int(oldPosX)!=int(posX))||(int(oldPosY)!=int(posY))) redraw();
     system("stty -echo")
  cmd = "bash -c 'read -t 1 -n 1 input; echo $input'"
@@ -722,7 +723,7 @@ function main()
             moveSpeed=newSpeed;}
             input=forward;
          }
-         
+
     if(input==movdown_key){
     if((int(posX)==winX)&&(int(posY)==winY)&&(int(moveSpeed)<1.2))
     return 0;
@@ -752,7 +753,7 @@ function main()
         if(worldMap(posX,newPosY) <= 5) {oldPosY= posY; posY = newPosY}
         else if(worldMap(posX,newPosY) == 9) posY = abs(posY-mapWidth);
         else return 1;
-    } 
+    }
     if (input == rotr_key ){
         newPosX = posX + dirX * moveSpeed
         newPosY = posY + dirY * moveSpeed
